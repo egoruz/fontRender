@@ -15,12 +15,14 @@ program
  .option('-f, --fontFamily', 'e.g `Roboto`')
   .option('-t, --text', 'text to render with fontFamily')
   .option('-w, --fontWeight', 'weight of the font face...')
-  .option('-W', '--width', 'width of the div') 
+  .option('-W', '--width', 'width of the div')
+  .option('-o','--host','host to query')
  .parse(process.argv);
 
 
-let { text, fontFamily, width} = program;
-let query = `localhost/textRender/?text=${text}&fontFamily=${fontFamily}&width=${width}`;
+let { text, fontFamily, width, host} = program;
+
+let query = `${host}?text=${text}&fontFamily=${fontFamily}&width=${width}`;
 
 phantomProxy.create({'debug': true}, function (proxy) {
     proxy.page.open(query,
