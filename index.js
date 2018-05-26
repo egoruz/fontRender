@@ -2,6 +2,7 @@
 
 let phantomProxy = require('phantom-proxy');
 
+let fs = require("fs");
 
 /*
 
@@ -27,12 +28,15 @@ let query = `${host}?text=${text}&fontFamily=${fontFamily}&width=${width}`;
 phantomProxy.create({'debug': true}, function (proxy) {
     proxy.page.open(query,
      function (result) {
-        assert.equal(result, true);
+//        assert.equal(result, true);
         proxy.page.waitForSelector('body', function (result) {
-            assert.equal(result, true);
-            proxy.page.render('./scratch/scratch.png', function (result) {
-                assert.equal(result, true);
-                proxy.end(function () {
+//            assert.equal(result, true);
+            proxy.page.render('scratch.png', function (result) {
+                //console.log(result);
+            fs.writeFileSync('scratch.out.png',result);    
+
+            proxy.end(function () {
+
                     console.log('done');
                 });
             });
