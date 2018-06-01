@@ -21,9 +21,12 @@ program
  .parse(process.argv);
 
 
+
 let { text, fontFamily, width, host} = program;
 
-let query = `${host}?text=${text}&fontFamily=${fontFamily}&width=${width}`;
+
+
+let query = `${host}:3000?text=${text}&fontFamily=${fontFamily}&width=${width}`;
 
 phantomProxy.create({'debug': true}, function (proxy) {
     proxy.page.open(query,
@@ -33,7 +36,11 @@ phantomProxy.create({'debug': true}, function (proxy) {
 //            assert.equal(result, true);
             proxy.page.render('scratch.png', function (result) {
                 //console.log(result);
-            fs.writeFileSync('scratch.out.png',result);    
+            fs.writeFileSync('scratch.out.png',result, function(err){
+                  if(err) {
+                  return console.log('chill...' + err);
+              } 
+            });    
 
             proxy.end(function () {
 
@@ -43,3 +50,4 @@ phantomProxy.create({'debug': true}, function (proxy) {
         }, 1000);
     });
 });
+

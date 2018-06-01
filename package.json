@@ -1,10 +1,13 @@
 {
   "phantom-proxy": "*",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "commander": "^2.15.1",
     "node-apt-get": "^0.1.1",
     "phantom-proxy": "^0.1.792",
     "phantomjs": "^2.1.7",
-    "phantomjs-prebuilt": "^2.1.16"
+    "phantomjs-prebuilt": "^2.1.16",
+    "vash": "^0.12.4",
+    "webserver": "^3.1.16"
   }
 }
