@@ -6,10 +6,10 @@ let fs = require("fs");
 
 /*
 
-  arguments to pass 
+  arguments to pass
 
 */
-var program = require('commander');
+let program = require('commander');
 
 
 program
@@ -29,18 +29,17 @@ let { text, fontFamily, width, host} = program;
 let query = `${host}:3000?text=${text}&fontFamily=${fontFamily}&width=${width}`;
 
 phantomProxy.create({'debug': true}, function (proxy) {
-    proxy.page.open(query,
-     function (result) {
-//        assert.equal(result, true);
+    proxy.page.open(query,function (result) {
+
         proxy.page.waitForSelector('body', function (result) {
-//            assert.equal(result, true);
+
             proxy.page.render('scratch.png', function (result) {
-                //console.log(result);
+
             fs.writeFileSync('scratch.out.png',result, function(err){
                   if(err) {
                   return console.log('chill...' + err);
-              } 
-            });    
+              }
+            });
 
             proxy.end(function () {
 
